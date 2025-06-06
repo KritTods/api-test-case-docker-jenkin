@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaseData.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">api-test-case</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.dto</a> &gt; <span class="el_source">CaseData.java</span></div><h1>CaseData.java</h1><pre class="source lang-java linenums">package com.example.demo.dto;
+
+import lombok.Data;
+import java.time.OffsetDateTime;
+import java.util.List;
+
+<span class="pc bnc" id="L7" title="All 1300 branches missed.">@Data</span>
+
+public class CaseData {
+<span class="fc" id="L10">    private String caseId;</span>
+<span class="nc" id="L11">    private String caseNumber;</span>
+<span class="nc" id="L12">    private String parentCaseNumber;</span>
+<span class="nc" id="L13">    private String ecId;</span>
+<span class="nc" id="L14">    private String rmId;</span>
+<span class="nc" id="L15">    private String customerName;</span>
+<span class="nc" id="L16">    private String contactPersonName;</span>
+<span class="nc" id="L17">    private String contactPersonEmail;</span>
+<span class="nc" id="L18">    private String contactPersonPhone;</span>
+<span class="nc" id="L19">    private String contactPersonPhone2;</span>
+<span class="nc" id="L20">    private String contactPersonChannelCode;</span>
+<span class="nc" id="L21">    private String contactPersonChannelValue;</span>
+<span class="nc" id="L22">    private String toExt1;</span>
+<span class="nc" id="L23">    private String toExt2;</span>
+<span class="nc" id="L24">    private String serviceTypeMatrixCode;</span>
+<span class="nc" id="L25">    private String serviceTypeMatrixType;</span>
+<span class="nc" id="L26">    private String serviceCategoryCode;</span>
+<span class="nc" id="L27">    private String serviceCategoryValue;</span>
+<span class="nc" id="L28">    private String serviceTabCode;</span>
+<span class="nc" id="L29">    private String serviceTabValue;</span>
+<span class="nc" id="L30">    private String subServiceTabCode;</span>
+<span class="nc" id="L31">    private String subServiceTabValue;</span>
+<span class="nc" id="L32">    private String supportedChannelCode;</span>
+<span class="nc" id="L33">    private String supportedChannelValue;</span>
+<span class="nc" id="L34">    private String productServiceCode;</span>
+<span class="nc" id="L35">    private String productServiceValue;</span>
+<span class="nc" id="L36">    private boolean ntbEligible;</span>
+<span class="nc" id="L37">    private String issueNameTtbTouchTh;</span>
+<span class="nc" id="L38">    private String issueNameTtbTouchEn;</span>
+<span class="nc" id="L39">    private String issueTh;</span>
+<span class="nc" id="L40">    private String issueEn;</span>
+<span class="nc" id="L41">    private String issueLine2Th;</span>
+<span class="nc" id="L42">    private String issueLine2En;</span>
+<span class="nc" id="L43">    private boolean fcr;</span>
+<span class="nc" id="L44">    private String serviceCaseDescription;</span>
+<span class="nc" id="L45">    private String description;</span>
+<span class="nc" id="L46">    private String messageId;</span>
+<span class="nc" id="L47">    private String urlLink;</span>
+<span class="nc" id="L48">    private boolean autoCloseCaseAfterResolved;</span>
+<span class="nc" id="L49">    private String severity;</span>
+<span class="nc" id="L50">    private String serviceTemplateCode;</span>
+<span class="nc" id="L51">    private String serviceTemplateValue;</span>
+<span class="nc" id="L52">    private String serviceTemplateTypeCode;</span>
+<span class="nc" id="L53">    private String serviceTemplateTypeValue;</span>
+<span class="nc" id="L54">    private String smsCodeInProgress;</span>
+<span class="nc" id="L55">    private String smsCodeNew;</span>
+<span class="nc" id="L56">    private String smsCodeResolved;</span>
+<span class="nc" id="L57">    private String smsCodeCompleted;</span>
+<span class="nc" id="L58">    private String smsCodeResolution1;</span>
+<span class="nc" id="L59">    private String smsCodeResolution2;</span>
+<span class="nc" id="L60">    private String resolution1Code;</span>
+<span class="nc" id="L61">    private String resolution1Value;</span>
+<span class="nc" id="L62">    private String resolution2Code;</span>
+<span class="nc" id="L63">    private String resolution2Value;</span>
+<span class="nc" id="L64">    private String autoResolutionCode;</span>
+<span class="nc" id="L65">    private String autoResolutionValue;</span>
+<span class="nc" id="L66">    private String carouselServiceTabCode;</span>
+<span class="nc" id="L67">    private String carouselServiceTabValue;</span>
+<span class="nc" id="L68">    private String ptaSegmentCode;</span>
+<span class="nc" id="L69">    private String ptaSegmentValue;</span>
+<span class="nc" id="L70">    private boolean rfRequired;</span>
+<span class="nc" id="L71">    private String priorityCode;</span>
+<span class="nc" id="L72">    private String priorityValue;</span>
+<span class="nc" id="L73">    private String branchCode;</span>
+<span class="nc" id="L74">    private String returnReasonCode;</span>
+<span class="nc" id="L75">    private String returnReasonValue;</span>
+<span class="nc" id="L76">    private String rootCauseListCode;</span>
+<span class="nc" id="L77">    private String rootCauseListValue;</span>
+<span class="nc" id="L78">    private String rootCauseComment;</span>
+<span class="nc" id="L79">    private String originCode;</span>
+<span class="nc" id="L80">    private String originValue;</span>
+<span class="nc" id="L81">    private String dataSourceCode;</span>
+<span class="nc" id="L82">    private String dataSourceValue;</span>
+<span class="nc" id="L83">    private String resolutionListCode;</span>
+<span class="nc" id="L84">    private String resolutionListValue;</span>
+<span class="nc" id="L85">    private String resolutionCommentCode;</span>
+<span class="nc" id="L86">    private String resolutionCommentValue;</span>
+<span class="nc" id="L87">    private String productType1;</span>
+<span class="nc" id="L88">    private String productType2;</span>
+<span class="nc" id="L89">    private String productType3;</span>
+<span class="nc" id="L90">    private String productNumber1;</span>
+<span class="nc" id="L91">    private String productNumber2;</span>
+<span class="nc" id="L92">    private String productNumber3;</span>
+<span class="nc" id="L93">    private String suffix1;</span>
+<span class="nc" id="L94">    private String suffix2;</span>
+<span class="nc" id="L95">    private String suffix3;</span>
+<span class="nc" id="L96">    private String cardNo;</span>
+<span class="nc" id="L97">    private String cardNo2;</span>
+<span class="nc" id="L98">    private OffsetDateTime transactionDate;</span>
+<span class="nc" id="L99">    private double fundTransferBillPaymentAmount;</span>
+<span class="nc" id="L100">    private double amountDepositWithdrawal;</span>
+<span class="nc" id="L101">    private String billerProviderName;</span>
+<span class="nc" id="L102">    private String ref1;</span>
+<span class="nc" id="L103">    private String ref2;</span>
+<span class="nc" id="L104">    private String ref3;</span>
+<span class="nc" id="L105">    private String atmBankOwnerCode;</span>
+<span class="nc" id="L106">    private String atmBankOwnerValue;</span>
+<span class="nc" id="L107">    private String branchAtmShopLocationTransactionCode;</span>
+<span class="nc" id="L108">    private String branchAtmShopLocationTransaction;</span>
+<span class="nc" id="L109">    private String branchAtmShopAddressThai;</span>
+<span class="nc" id="L110">    private String branchAtmShopNumber;</span>
+<span class="nc" id="L111">    private String tepTransId;</span>
+<span class="nc" id="L112">    private String callNumber;</span>
+<span class="nc" id="L113">    private String participantId;</span>
+<span class="nc" id="L114">    private String conversationId;</span>
+<span class="nc" id="L115">    private String caseStatusCode;</span>
+<span class="nc" id="L116">    private String caseStatusValue;</span>
+<span class="nc" id="L117">    private String ownerId;</span>
+<span class="nc" id="L118">    private String ownerName;</span>
+<span class="nc" id="L119">    private String teamId;</span>
+<span class="nc" id="L120">    private String teamName;</span>
+<span class="nc" id="L121">    private String integrationSource;</span>
+<span class="nc" id="L122">    private OffsetDateTime slaStartDate;</span>
+<span class="nc" id="L123">    private OffsetDateTime slaTargetDate;</span>
+<span class="nc" id="L124">    private OffsetDateTime slaActualDate;</span>
+<span class="nc" id="L125">    private String slaStatus;</span>
+<span class="nc" id="L126">    private OffsetDateTime closedDate;</span>
+<span class="nc" id="L127">    private List&lt;SlaHop&gt; slaHop;  // ต้องสร้างคลาส SlaHop ด้วย</span>
+<span class="nc" id="L128">    private OffsetDateTime modifiedOn;</span>
+<span class="nc" id="L129">    private OffsetDateTime createdOn;</span>
+<span class="nc" id="L130">    private String createdByEmaployeeId;</span>
+<span class="nc" id="L131">    private String createdByName;</span>
+<span class="nc" id="L132">    private String createdByTeamId;</span>
+<span class="nc" id="L133">    private String createdByTeamName;</span>
+<span class="nc" id="L134">    private String cancelReasonCode;</span>
+<span class="nc" id="L135">    private String cancelReasonValue;</span>
+<span class="nc" id="L136">    private String cancelReasonComment;</span>
+<span class="nc" id="L137">    private boolean visibleOnTouch;</span>
+<span class="nc" id="L138">    private String sla;</span>
+<span class="nc" id="L139">    private int activeHopNumber;</span>
+<span class="nc" id="L140">    private String correctRecipientBankCode;</span>
+<span class="nc" id="L141">    private String correctBankRecipientAccountNo;</span>
+<span class="nc" id="L142">    private String transactionTypeCode;</span>
+<span class="nc" id="L143">    private double amountReceivedDepositToAccount;</span>
+<span class="nc" id="L144">    private double depositAmount;</span>
+<span class="nc" id="L145">    private String subsidiary;</span>
+<span class="nc" id="L146">    private double amountWithdrawalDeposit;</span>
+<span class="nc" id="L147">    private String documentId;</span>
+<span class="nc" id="L148">    private String externalId;</span>
+<span class="nc" id="L149">    private String objectId;</span>
+<span class="nc" id="L150">    private String repositoryId;</span>
+<span class="nc" id="L151">    private String documentType;</span>
+<span class="nc" id="L152">    private boolean readyToPrint;</span>
+<span class="nc" id="L153">    private String emsTracking;</span>
+<span class="nc" id="L154">    private String productTypeCode1;</span>
+<span class="nc" id="L155">    private String productTypeCode2;</span>
+<span class="nc" id="L156">    private String productTypeCode3;</span>
+<span class="nc" id="L157">    private String subProductTypeCode1;</span>
+<span class="nc" id="L158">    private String subProductTypeCode2;</span>
+<span class="nc" id="L159">    private String subProductTypeCode3;</span>
+<span class="nc" id="L160">    private String productTypeValue1;</span>
+<span class="nc" id="L161">    private String productTypeValue2;</span>
+<span class="nc" id="L162">    private String productTypeValue3;</span>
+<span class="nc" id="L163">    private String subProductTypeValue1;</span>
+<span class="nc" id="L164">    private String subProductTypeValue2;</span>
+<span class="nc" id="L165">    private String subProductTypeValue3;</span>
+<span class="nc" id="L166">    private String productNumberFull1;</span>
+<span class="nc" id="L167">    private String productNumberFull2;</span>
+<span class="nc" id="L168">    private String productNumberFull3;</span>
+<span class="nc" id="L169">    private String productNumberMarking1;</span>
+<span class="nc" id="L170">    private String productNumberMarking2;</span>
+<span class="nc" id="L171">    private String productNumberMarking3;</span>
+<span class="nc" id="L172">    private String fundCode1;</span>
+<span class="nc" id="L173">    private String fundCode2;</span>
+<span class="nc" id="L174">    private String fundCode3;</span>
+<span class="nc" id="L175">    private String promptPay;</span>
+<span class="nc" id="L176">    private OffsetDateTime startCall;</span>
+<span class="nc" id="L177">    private OffsetDateTime endCall;</span>
+<span class="nc" id="L178">    private int callDuration;</span>
+<span class="nc" id="L179">    private String callChannel;</span>
+
+    // Generate getters and setters for all fields (IDE ช่วยได้)
+
+
+    // (ต่อด้วย getters และ setters ของ CaseData ทุกตัว)
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

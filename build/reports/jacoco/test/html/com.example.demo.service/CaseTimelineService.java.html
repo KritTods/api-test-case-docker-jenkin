@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaseTimelineService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">api-test-case</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.service</a> &gt; <span class="el_source">CaseTimelineService.java</span></div><h1>CaseTimelineService.java</h1><pre class="source lang-java linenums">package com.example.demo.service;
+
+import com.example.demo.dto.CaseData;
+import com.example.demo.dto.SlaHop;
+import com.example.demo.dto.response.BodyDecryptedDto;
+import com.example.demo.dto.response.BodyEncryptedDto;
+import com.example.demo.dto.request.CaseStatusRequest;
+import com.example.demo.dto.response.CaseStatusResponse;
+import org.springframework.stereotype.Service;
+
+import java.time.OffsetDateTime;
+import java.util.List;
+
+@Service
+<span class="fc" id="L15">public class CaseTimelineService {</span>
+
+    public CaseStatusResponse retrieveCaseTimeline(CaseStatusRequest request) {
+        // สร้างข้อมูล CaseData ตัวอย่าง
+<span class="fc" id="L19">        CaseData data = new CaseData();</span>
+<span class="fc" id="L20">        data.setCaseId(&quot;CASE123456&quot;);</span>
+<span class="fc" id="L21">        data.setCaseNumber(&quot;CN0001&quot;);</span>
+<span class="fc" id="L22">        data.setParentCaseNumber(&quot;PCN0001&quot;);</span>
+<span class="fc" id="L23">        data.setEcId(&quot;EC789&quot;);</span>
+<span class="fc" id="L24">        data.setRmId(&quot;RM001&quot;);</span>
+<span class="fc" id="L25">        data.setCustomerName(&quot;John Doe&quot;);</span>
+<span class="fc" id="L26">        data.setContactPersonName(&quot;Jane Smith&quot;);</span>
+<span class="fc" id="L27">        data.setContactPersonEmail(&quot;jane.smith@example.com&quot;);</span>
+<span class="fc" id="L28">        data.setContactPersonPhone(&quot;0800000001&quot;);</span>
+<span class="fc" id="L29">        data.setContactPersonPhone2(&quot;0800000002&quot;);</span>
+<span class="fc" id="L30">        data.setContactPersonChannelCode(&quot;LINE&quot;);</span>
+<span class="fc" id="L31">        data.setContactPersonChannelValue(&quot;Line Official&quot;);</span>
+<span class="fc" id="L32">        data.setToExt1(&quot;EXT001&quot;);</span>
+<span class="fc" id="L33">        data.setToExt2(&quot;EXT002&quot;);</span>
+<span class="fc" id="L34">        data.setServiceTypeMatrixCode(&quot;STMC001&quot;);</span>
+<span class="fc" id="L35">        data.setServiceTypeMatrixType(&quot;Complaint&quot;);</span>
+<span class="fc" id="L36">        data.setServiceCategoryCode(&quot;SCC001&quot;);</span>
+<span class="fc" id="L37">        data.setServiceCategoryValue(&quot;Banking Issue&quot;);</span>
+<span class="fc" id="L38">        data.setServiceTabCode(&quot;STC001&quot;);</span>
+<span class="fc" id="L39">        data.setServiceTabValue(&quot;Deposit&quot;);</span>
+<span class="fc" id="L40">        data.setSubServiceTabCode(&quot;SSTC001&quot;);</span>
+<span class="fc" id="L41">        data.setSubServiceTabValue(&quot;Savings&quot;);</span>
+<span class="fc" id="L42">        data.setSupportedChannelCode(&quot;WEB&quot;);</span>
+<span class="fc" id="L43">        data.setSupportedChannelValue(&quot;Website&quot;);</span>
+<span class="fc" id="L44">        data.setProductServiceCode(&quot;PSC001&quot;);</span>
+<span class="fc" id="L45">        data.setProductServiceValue(&quot;Online Banking&quot;);</span>
+<span class="fc" id="L46">        data.setNtbEligible(true);</span>
+<span class="fc" id="L47">        data.setIssueNameTtbTouchTh(&quot;การโอนเงินล้มเหลว&quot;);</span>
+<span class="fc" id="L48">        data.setIssueNameTtbTouchEn(&quot;Failed Transfer&quot;);</span>
+<span class="fc" id="L49">        data.setIssueTh(&quot;ไม่สามารถโอนเงินได้&quot;);</span>
+<span class="fc" id="L50">        data.setIssueEn(&quot;Unable to transfer money&quot;);</span>
+<span class="fc" id="L51">        data.setIssueLine2Th(&quot;กรุณาลองใหม่อีกครั้ง&quot;);</span>
+<span class="fc" id="L52">        data.setIssueLine2En(&quot;Please try again later&quot;);</span>
+<span class="fc" id="L53">        data.setFcr(false);</span>
+<span class="fc" id="L54">        data.setServiceCaseDescription(&quot;Customer could not complete fund transfer&quot;);</span>
+<span class="fc" id="L55">        data.setDescription(&quot;Customer reported a failed transaction via web portal&quot;);</span>
+<span class="fc" id="L56">        data.setMessageId(&quot;MSG12345&quot;);</span>
+<span class="fc" id="L57">        data.setUrlLink(&quot;https://ttbexample.com/support/case/CASE123456&quot;);</span>
+<span class="fc" id="L58">        data.setAutoCloseCaseAfterResolved(true);</span>
+<span class="fc" id="L59">        data.setSeverity(&quot;HIGH&quot;);</span>
+<span class="fc" id="L60">        data.setServiceTemplateCode(&quot;STPL001&quot;);</span>
+<span class="fc" id="L61">        data.setServiceTemplateValue(&quot;Fund Transfer&quot;);</span>
+<span class="fc" id="L62">        data.setServiceTemplateTypeCode(&quot;TTYPE01&quot;);</span>
+<span class="fc" id="L63">        data.setServiceTemplateTypeValue(&quot;Online Service&quot;);</span>
+<span class="fc" id="L64">        data.setSmsCodeInProgress(&quot;SMS001&quot;);</span>
+<span class="fc" id="L65">        data.setSmsCodeNew(&quot;SMS002&quot;);</span>
+<span class="fc" id="L66">        data.setSmsCodeResolved(&quot;SMS003&quot;);</span>
+<span class="fc" id="L67">        data.setSmsCodeCompleted(&quot;SMS004&quot;);</span>
+<span class="fc" id="L68">        data.setSmsCodeResolution1(&quot;SMS005&quot;);</span>
+<span class="fc" id="L69">        data.setSmsCodeResolution2(&quot;SMS006&quot;);</span>
+<span class="fc" id="L70">        data.setResolution1Code(&quot;R1C001&quot;);</span>
+<span class="fc" id="L71">        data.setResolution1Value(&quot;Reset Transaction&quot;);</span>
+<span class="fc" id="L72">        data.setResolution2Code(&quot;R2C002&quot;);</span>
+<span class="fc" id="L73">        data.setResolution2Value(&quot;Notify Customer&quot;);</span>
+<span class="fc" id="L74">        data.setAutoResolutionCode(&quot;ARC001&quot;);</span>
+<span class="fc" id="L75">        data.setAutoResolutionValue(&quot;Retry Mechanism&quot;);</span>
+<span class="fc" id="L76">        data.setCarouselServiceTabCode(&quot;CSC001&quot;);</span>
+<span class="fc" id="L77">        data.setCarouselServiceTabValue(&quot;Funds&quot;);</span>
+<span class="fc" id="L78">        data.setPtaSegmentCode(&quot;PTA01&quot;);</span>
+<span class="fc" id="L79">        data.setPtaSegmentValue(&quot;Premium&quot;);</span>
+<span class="fc" id="L80">        data.setRfRequired(true);</span>
+<span class="fc" id="L81">        data.setPriorityCode(&quot;P1&quot;);</span>
+<span class="fc" id="L82">        data.setPriorityValue(&quot;Critical&quot;);</span>
+<span class="fc" id="L83">        data.setBranchCode(&quot;B001&quot;);</span>
+<span class="fc" id="L84">        data.setReturnReasonCode(&quot;RR001&quot;);</span>
+<span class="fc" id="L85">        data.setReturnReasonValue(&quot;Incorrect Info&quot;);</span>
+<span class="fc" id="L86">        data.setRootCauseListCode(&quot;RC001&quot;);</span>
+<span class="fc" id="L87">        data.setRootCauseListValue(&quot;System Timeout&quot;);</span>
+<span class="fc" id="L88">        data.setRootCauseComment(&quot;Network latency caused failure&quot;);</span>
+<span class="fc" id="L89">        data.setOriginCode(&quot;OG001&quot;);</span>
+<span class="fc" id="L90">        data.setOriginValue(&quot;Online&quot;);</span>
+<span class="fc" id="L91">        data.setDataSourceCode(&quot;DS001&quot;);</span>
+<span class="fc" id="L92">        data.setDataSourceValue(&quot;CRM&quot;);</span>
+<span class="fc" id="L93">        data.setResolutionListCode(&quot;RES001&quot;);</span>
+<span class="fc" id="L94">        data.setResolutionListValue(&quot;Retry&quot;);</span>
+<span class="fc" id="L95">        data.setResolutionCommentCode(&quot;RCM001&quot;);</span>
+<span class="fc" id="L96">        data.setResolutionCommentValue(&quot;Confirmed with backend&quot;);</span>
+<span class="fc" id="L97">        data.setProductType1(&quot;Savings&quot;);</span>
+<span class="fc" id="L98">        data.setProductType2(&quot;Current&quot;);</span>
+<span class="fc" id="L99">        data.setProductType3(&quot;Fixed&quot;);</span>
+<span class="fc" id="L100">        data.setProductNumber1(&quot;1234567890&quot;);</span>
+<span class="fc" id="L101">        data.setProductNumber2(&quot;0987654321&quot;);</span>
+<span class="fc" id="L102">        data.setProductNumber3(&quot;5678901234&quot;);</span>
+<span class="fc" id="L103">        data.setSuffix1(&quot;001&quot;);</span>
+<span class="fc" id="L104">        data.setSuffix2(&quot;002&quot;);</span>
+<span class="fc" id="L105">        data.setSuffix3(&quot;003&quot;);</span>
+<span class="fc" id="L106">        data.setCardNo(&quot;411111******1111&quot;);</span>
+<span class="fc" id="L107">        data.setCardNo2(&quot;422222******2222&quot;);</span>
+<span class="fc" id="L108">        data.setTransactionDate(OffsetDateTime.parse(&quot;2025-05-20T14:00:00+07:00&quot;));</span>
+<span class="fc" id="L109">        data.setFundTransferBillPaymentAmount(1500.00);</span>
+<span class="fc" id="L110">        data.setAmountDepositWithdrawal(2000.00);</span>
+<span class="fc" id="L111">        data.setBillerProviderName(&quot;Electric Co.&quot;);</span>
+<span class="fc" id="L112">        data.setRef1(&quot;REF001&quot;);</span>
+<span class="fc" id="L113">        data.setRef2(&quot;REF002&quot;);</span>
+<span class="fc" id="L114">        data.setRef3(&quot;REF003&quot;);</span>
+<span class="fc" id="L115">        data.setAtmBankOwnerCode(&quot;ATM001&quot;);</span>
+<span class="fc" id="L116">        data.setAtmBankOwnerValue(&quot;TTB&quot;);</span>
+<span class="fc" id="L117">        data.setBranchAtmShopLocationTransactionCode(&quot;LOC001&quot;);</span>
+<span class="fc" id="L118">        data.setBranchAtmShopLocationTransaction(&quot;Central Plaza&quot;);</span>
+<span class="fc" id="L119">        data.setBranchAtmShopAddressThai(&quot;123 ถนนสุขุมวิท กรุงเทพฯ&quot;);</span>
+<span class="fc" id="L120">        data.setBranchAtmShopNumber(&quot;BR1234&quot;);</span>
+<span class="fc" id="L121">        data.setTepTransId(&quot;TEP12345678&quot;);</span>
+<span class="fc" id="L122">        data.setCallNumber(&quot;C1234567&quot;);</span>
+<span class="fc" id="L123">        data.setParticipantId(&quot;PART001&quot;);</span>
+<span class="fc" id="L124">        data.setConversationId(&quot;CONV001&quot;);</span>
+<span class="fc" id="L125">        data.setCaseStatusCode(&quot;OPEN&quot;);</span>
+<span class="fc" id="L126">        data.setCaseStatusValue(&quot;เปิดเคส&quot;);</span>
+<span class="fc" id="L127">        data.setOwnerId(&quot;EMP123&quot;);</span>
+<span class="fc" id="L128">        data.setOwnerName(&quot;Nattapong L.&quot;);</span>
+<span class="fc" id="L129">        data.setTeamId(&quot;TEAM01&quot;);</span>
+<span class="fc" id="L130">        data.setTeamName(&quot;Customer Care&quot;);</span>
+<span class="fc" id="L131">        data.setIntegrationSource(&quot;TEP&quot;);</span>
+<span class="fc" id="L132">        data.setSlaStartDate(OffsetDateTime.parse(&quot;2025-05-20T14:01:00+07:00&quot;));</span>
+<span class="fc" id="L133">        data.setSlaTargetDate(OffsetDateTime.parse(&quot;2025-05-22T14:01:00+07:00&quot;));</span>
+<span class="fc" id="L134">        data.setSlaActualDate(OffsetDateTime.parse(&quot;2025-05-21T10:00:00+07:00&quot;));</span>
+<span class="fc" id="L135">        data.setSlaStatus(&quot;MET&quot;);</span>
+<span class="fc" id="L136">        data.setClosedDate(OffsetDateTime.parse(&quot;2025-05-21T10:00:00+07:00&quot;));</span>
+<span class="fc" id="L137">        data.setSlaHop(List.of(</span>
+                new SlaHop()
+        ));
+<span class="fc" id="L140">        data.setModifiedOn(OffsetDateTime.parse(&quot;2025-05-21T10:01:00+07:00&quot;));</span>
+<span class="fc" id="L141">        data.setCreatedOn(OffsetDateTime.parse(&quot;2025-05-20T14:00:00+07:00&quot;));</span>
+<span class="fc" id="L142">        data.setCreatedByEmaployeeId(&quot;EMP111&quot;);</span>
+<span class="fc" id="L143">        data.setCreatedByName(&quot;Siriwan T.&quot;);</span>
+<span class="fc" id="L144">        data.setCreatedByTeamId(&quot;TEAM01&quot;);</span>
+<span class="fc" id="L145">        data.setCreatedByTeamName(&quot;Customer Care&quot;);</span>
+<span class="fc" id="L146">        data.setCancelReasonCode(null);</span>
+<span class="fc" id="L147">        data.setCancelReasonValue(null);</span>
+<span class="fc" id="L148">        data.setCancelReasonComment(null);</span>
+<span class="fc" id="L149">        data.setVisibleOnTouch(true);</span>
+<span class="fc" id="L150">        data.setSla(&quot;24h&quot;);</span>
+<span class="fc" id="L151">        data.setActiveHopNumber(1);</span>
+<span class="fc" id="L152">        data.setCorrectRecipientBankCode(&quot;KTB&quot;);</span>
+<span class="fc" id="L153">        data.setCorrectBankRecipientAccountNo(&quot;123456789012&quot;);</span>
+<span class="fc" id="L154">        data.setTransactionTypeCode(&quot;TT01&quot;);</span>
+<span class="fc" id="L155">        data.setAmountReceivedDepositToAccount(1450.00);</span>
+<span class="fc" id="L156">        data.setDepositAmount(2000.00);</span>
+<span class="fc" id="L157">        data.setSubsidiary(&quot;TTB Public Co., Ltd.&quot;);</span>
+<span class="fc" id="L158">        data.setAmountWithdrawalDeposit(500.00);</span>
+<span class="fc" id="L159">        data.setDocumentId(&quot;DOC001&quot;);</span>
+<span class="fc" id="L160">        data.setExternalId(&quot;EXT123456&quot;);</span>
+<span class="fc" id="L161">        data.setObjectId(&quot;OBJ001&quot;);</span>
+<span class="fc" id="L162">        data.setRepositoryId(&quot;REP001&quot;);</span>
+<span class="fc" id="L163">        data.setDocumentType(&quot;PDF&quot;);</span>
+<span class="fc" id="L164">        data.setReadyToPrint(false);</span>
+<span class="fc" id="L165">        data.setEmsTracking(&quot;EMS123456789TH&quot;);</span>
+<span class="fc" id="L166">        data.setProductTypeCode1(&quot;PTC1&quot;);</span>
+<span class="fc" id="L167">        data.setProductTypeCode2(&quot;PTC2&quot;);</span>
+<span class="fc" id="L168">        data.setProductTypeCode3(&quot;PTC3&quot;);</span>
+<span class="fc" id="L169">        data.setSubProductTypeCode1(&quot;SPTC1&quot;);</span>
+<span class="fc" id="L170">        data.setSubProductTypeCode2(&quot;SPTC2&quot;);</span>
+<span class="fc" id="L171">        data.setSubProductTypeCode3(&quot;SPTC3&quot;);</span>
+<span class="fc" id="L172">        data.setProductTypeValue1(&quot;Saving Account&quot;);</span>
+<span class="fc" id="L173">        data.setProductTypeValue2(&quot;Current Account&quot;);</span>
+<span class="fc" id="L174">        data.setProductTypeValue3(&quot;Fixed Deposit&quot;);</span>
+<span class="fc" id="L175">        data.setSubProductTypeValue1(&quot;Standard&quot;);</span>
+<span class="fc" id="L176">        data.setSubProductTypeValue2(&quot;Premium&quot;);</span>
+<span class="fc" id="L177">        data.setSubProductTypeValue3(&quot;Gold&quot;);</span>
+<span class="fc" id="L178">        data.setProductNumberFull1(&quot;1234567890123456&quot;);</span>
+<span class="fc" id="L179">        data.setProductNumberFull2(&quot;6543210987654321&quot;);</span>
+<span class="fc" id="L180">        data.setProductNumberFull3(&quot;1122334455667788&quot;);</span>
+<span class="fc" id="L181">        data.setProductNumberMarking1(&quot;XXXX1234&quot;);</span>
+<span class="fc" id="L182">        data.setProductNumberMarking2(&quot;XXXX5678&quot;);</span>
+<span class="fc" id="L183">        data.setProductNumberMarking3(&quot;XXXX9999&quot;);</span>
+<span class="fc" id="L184">        data.setFundCode1(&quot;F001&quot;);</span>
+<span class="fc" id="L185">        data.setFundCode2(&quot;F002&quot;);</span>
+<span class="fc" id="L186">        data.setFundCode3(&quot;F003&quot;);</span>
+<span class="fc" id="L187">        data.setPromptPay(&quot;0987654321&quot;);</span>
+<span class="fc" id="L188">        data.setStartCall(OffsetDateTime.parse(&quot;2025-05-20T14:05:00+07:00&quot;));</span>
+<span class="fc" id="L189">        data.setEndCall(OffsetDateTime.parse(&quot;2025-05-20T14:25:00+07:00&quot;));</span>
+<span class="fc" id="L190">        data.setCallDuration(1200);</span>
+<span class="fc" id="L191">        data.setCallChannel(&quot;Phone&quot;);</span>
+
+        // สร้าง BodyDecryptedDto ด้วย constructor ที่มีพารามิเตอร์
+<span class="fc" id="L194">        BodyDecryptedDto decrypted = new BodyDecryptedDto(</span>
+                &quot;200&quot;,
+                &quot;Success&quot;,
+<span class="fc" id="L197">                List.of(data)</span>
+        );
+
+        // สร้าง BodyEncryptedDto
+<span class="fc" id="L201">        BodyEncryptedDto encrypted = new BodyEncryptedDto();</span>
+<span class="fc" id="L202">        encrypted.setEncryptedData(&quot;28da27...55d010&quot;);</span>
+<span class="fc" id="L203">        encrypted.setInitialVector(request.getBodyEncrypted().getInitialVector());</span>
+
+<span class="fc" id="L205">        CaseStatusResponse response = new CaseStatusResponse();</span>
+<span class="fc" id="L206">        response.setBodyEncrypted(encrypted);</span>
+<span class="fc" id="L207">        response.setBodyDecrypted(decrypted);</span>
+
+<span class="fc" id="L209">        return response;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

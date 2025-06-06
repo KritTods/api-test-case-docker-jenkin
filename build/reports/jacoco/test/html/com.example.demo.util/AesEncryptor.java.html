@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AesEncryptor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">api-test-case</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.util</a> &gt; <span class="el_source">AesEncryptor.java</span></div><h1>AesEncryptor.java</h1><pre class="source lang-java linenums">package com.example.demo.util;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+
+<span class="nc" id="L8">public class AesEncryptor {</span>
+
+    public static String decrypt(String encryptedDataHex, String ivHex, String secretKey) throws Exception {
+<span class="nc" id="L11">        byte[] encryptedBytes = hexStringToByteArray(encryptedDataHex);</span>
+<span class="nc" id="L12">        byte[] ivBytes = hexStringToByteArray(ivHex);</span>
+
+<span class="nc" id="L14">        Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);</span>
+<span class="nc" id="L15">        SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), &quot;AES&quot;);</span>
+<span class="nc" id="L16">        IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);</span>
+
+<span class="nc" id="L18">        cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);</span>
+<span class="nc" id="L19">        byte[] decrypted = cipher.doFinal(encryptedBytes);</span>
+
+<span class="nc" id="L21">        return new String(decrypted, StandardCharsets.UTF_8);</span>
+    }
+
+    private static byte[] hexStringToByteArray(String s) {
+<span class="nc" id="L25">        int len = s.length();</span>
+<span class="nc" id="L26">        byte[] data = new byte[len / 2];</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        for (int i = 0; i &lt; len; i += 2) {</span>
+<span class="nc" id="L28">            data[i / 2] = (byte)</span>
+<span class="nc" id="L29">                    ((Character.digit(s.charAt(i), 16) &lt;&lt; 4)</span>
+<span class="nc" id="L30">                            + Character.digit(s.charAt(i+1), 16));</span>
+        }
+<span class="nc" id="L32">        return data;</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

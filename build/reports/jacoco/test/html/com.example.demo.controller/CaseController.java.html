@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaseController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">api-test-case</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.controller</a> &gt; <span class="el_source">CaseController.java</span></div><h1>CaseController.java</h1><pre class="source lang-java linenums">package com.example.demo.controller;
+
+import com.example.demo.dto.CancelCaseRequest;
+import com.example.demo.dto.CancelCaseResponse;
+import com.example.demo.dto.request.CaseStatusRequest;
+import com.example.demo.dto.response.CaseStatusResponse;
+import com.example.demo.model.ConfirmCaseResponse;
+import com.example.demo.service.CancelCaseService;
+import com.example.demo.service.CaseStatusService;
+import com.example.demo.service.CaseTimelineService;
+import com.example.demo.service.CompleteCaseService;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/api/case&quot;)
+public class CaseController {
+
+    private final CompleteCaseService completeCaseService;
+    private final CancelCaseService cancelCaseService;
+    private final CaseStatusService caseStatusService;
+    private final CaseTimelineService caseTimelineService;
+
+
+    @Autowired
+    public CaseController(CompleteCaseService completeCaseService,
+                          CancelCaseService cancelCaseService,
+                          CaseStatusService caseStatusService,
+<span class="fc" id="L31">                          CaseTimelineService caseTimelineService) {</span>
+<span class="fc" id="L32">        this.completeCaseService = completeCaseService;</span>
+<span class="fc" id="L33">        this.cancelCaseService = cancelCaseService;</span>
+<span class="fc" id="L34">        this.caseStatusService = caseStatusService;</span>
+<span class="fc" id="L35">        this.caseTimelineService = caseTimelineService;</span>
+<span class="fc" id="L36">    }</span>
+
+    @Operation(summary = &quot;API UpdateCaseStatus Complete&quot;)
+    @PostMapping(&quot;/complete&quot;)
+    public ConfirmCaseResponse processCase(
+            @RequestParam String encryptedData,
+            @RequestParam String initialVector
+    ) {
+<span class="fc" id="L44">        return completeCaseService.processRequest(encryptedData, initialVector);</span>
+    }
+
+    @Operation(summary = &quot;API UpdateCaseStatus Cancel&quot;)
+    @PostMapping(&quot;/cancel&quot;)
+    public ResponseEntity&lt;CancelCaseResponse&gt; cancelCase(@RequestBody CancelCaseRequest request) {
+<span class="fc" id="L50">        CancelCaseResponse response = cancelCaseService.cancelCase(request);</span>
+<span class="fc" id="L51">        return ResponseEntity.ok(response);</span>
+    }
+
+    @Operation(summary = &quot;API UpdateCaseStatus resolveCase&quot;)
+    @PostMapping(&quot;/resolve&quot;)
+    public ResponseEntity&lt;CaseStatusResponse&gt; resolveCase(@RequestBody CaseStatusRequest request) {
+<span class="fc" id="L57">        CaseStatusResponse response = caseStatusService.resolveCase(request);</span>
+<span class="fc" id="L58">        return ResponseEntity.ok(response);</span>
+    }
+
+    @Operation(summary = &quot;API RetriveCase Timeline&quot;)
+    @PostMapping(&quot;/retrieve&quot;)
+    public ResponseEntity&lt;CaseStatusResponse&gt; retrieve(@RequestBody CaseStatusRequest request) {
+<span class="nc" id="L64">        return ResponseEntity.ok(caseTimelineService.retrieveCaseTimeline(request));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

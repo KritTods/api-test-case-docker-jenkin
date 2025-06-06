@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CancelCaseService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">api-test-case</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.service</a> &gt; <span class="el_source">CancelCaseService.java</span></div><h1>CancelCaseService.java</h1><pre class="source lang-java linenums">package com.example.demo.service; // 🔧 ใช้ชื่อ package ให้ตรงกัน
+
+import com.example.demo.dto.*;
+import com.example.demo.util.AesEncryptor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CancelCaseService {
+
+    private static final String SECRET_KEY = &quot;1234567890123456&quot;; // AES-128 key
+
+    private final ObjectMapper objectMapper;
+
+<span class="fc" id="L15">    public CancelCaseService(ObjectMapper objectMapper) {</span>
+<span class="fc" id="L16">        this.objectMapper = objectMapper;</span>
+<span class="fc" id="L17">    }</span>
+
+    public CancelCaseResponse cancelCase(CancelCaseRequest request) {
+        BodyDecrypted bodydecrypted;
+        try {
+<span class="nc" id="L22">            String json = AesEncryptor.decrypt(</span>
+<span class="nc" id="L23">                    request.getBodyEncrypted().getEncryptedData(),</span>
+<span class="nc" id="L24">                    request.getBodyEncrypted().getInitialVector(),</span>
+                    SECRET_KEY
+            );
+<span class="nc" id="L27">            bodydecrypted = objectMapper.readValue(json, BodyDecrypted.class);</span>
+<span class="nc" id="L28">        } catch (Exception e) {</span>
+<span class="nc" id="L29">            throw new RuntimeException(&quot;Failed to decrypt request body&quot;, e);</span>
+<span class="nc" id="L30">        }</span>
+
+<span class="nc" id="L32">        ResponseBodyDecrypted decrypted = new ResponseBodyDecrypted();</span>
+<span class="nc" id="L33">        decrypted.setStatusCode(&quot;200&quot;);</span>
+<span class="nc" id="L34">        decrypted.setStatusDescription(&quot;Success&quot;);</span>
+<span class="nc" id="L35">        decrypted.setData(null);</span>
+
+<span class="nc" id="L37">        CancelCaseResponse response = new CancelCaseResponse();</span>
+<span class="nc" id="L38">        response.setBodyEncrypted(request.getBodyEncrypted()); // ถ้าต้องการเข้ารหัสใหม่ให้ใช้ AesEncryptor.encrypt(...)</span>
+<span class="nc" id="L39">        response.setBodyDecrypted(decrypted);</span>
+<span class="nc" id="L40">        return response;</span>
+    }
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

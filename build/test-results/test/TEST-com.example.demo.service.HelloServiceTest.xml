@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.demo.service.HelloServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-05-30T06:46:49.990Z" hostname="apples-MacBook-Pro.local" time="0.0">
+  <properties/>
+  <testcase name="sayHello_ShouldReturnCorrectMessage()" classname="com.example.demo.service.HelloServiceTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
