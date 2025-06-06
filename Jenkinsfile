@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/medesigndd/api-test-case-docker-jenkin.git'
+                git 'https://github.com/KritTods/api-test-case-docker-jenkin.git'
             }
         }
 
